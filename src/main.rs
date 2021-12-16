@@ -1,15 +1,22 @@
-mod struct_file;
-mod trait_file;
-mod util;
-
-use rand::AsByteSliceMut;
+use std::io::Error;
+use std::ffi::OsStr;
+use std::iter::once;
+use std::os::windows::ffi::OsStrExt;
+use std::ptr::null_mut;
+use winapi::um::winuser::{MessageBoxW, MB_OK};
+use winapi::um;
 
 fn main() {
-    let name = String::from("小明");
-    let age = 18;
-    let mut x_ming = struct_file::student::Student {name, age};
-    trait_file::show_me::show_name(&x_ming);
-    x_ming.show_self_age();
-    util::student_util::end_life(&mut x_ming);
-    println!("小明已死:{} {}", x_ming.age, x_ming.name)
+    print_message("你好").unwrap();
+}
+
+#[cfg(windows)]
+fn print_message(msg: &str) -> Result<i32, Error> {
+    let wide: Vec<u16> = OsStr::new(msg).encode_wide().chain(once(0)).collect();
+    let ret = unsafe { MessageBoxW(null_mut(), wide.as_ptr(), wide.as_ptr(), MB_OK) };
+    if ret == 0 {
+        Err(Error::last_os_error())
+    } else {
+        Ok(ret)
+    }
 }
