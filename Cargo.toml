@@ -7,4 +7,5 @@ edition = "2021"
 
 [dependencies]
 [target.'cfg(windows)'.dependencies]
-winapi = { version = "0.3", features=["winuser", "memoryapi"]}
+winapi = { version = "0.3", features = ["winuser", "memoryapi",
+    "minwindef", "processthreadsapi", "ntdef", "basetsd"] }
