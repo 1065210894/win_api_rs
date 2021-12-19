@@ -1,29 +1,29 @@
-use winapi::um::winuser::{MessageBoxW, MB_OK, FindWindowW, GetWindowThreadProcessId};
-use winapi::shared::minwindef::{LPVOID, LPCVOID, BOOL, DWORD, LPDWORD};
-use winapi::um::processthreadsapi::{OpenProcess, PROCESS_ALL_ACCESS};
 use winapi::um::memoryapi::ReadProcessMemory;
 use winapi::shared::ntdef::{HANDLE};
-use crate::utils::string_utils;
-use std::ptr::{null, null_mut};
 use std::io::Error;
 
-
-pub fn read_memory_by_vec<T>(processHandle: HANDLE, addressVec: &Vec<usize>) -> Result<(T, usize), String> where
+/**
+通过地址加偏移的方式读取数据， vec的第一个数值需要 模块地址加偏移
+其他数值都是偏移。泛型T是最后的物理要读取的数据大小对应的数据类型
+u32 就是的读4字节数据。 u8 就是读单字节数据
+返回值 T:读取的数据 usize:最后的物理地址
+*/
+pub fn read_memory_by_vec<T>(process_handle: HANDLE, address_vec: &Vec<usize>) -> Result<(T, usize), String> where
     T: Sized + Default {
-    if !(addressVec.len() > 0) {
+    if !(address_vec.len() > 0) {
         return Result::Err(String::from("addressVec不能为空!"));
     }
     let mut result: T = Default::default();
     let mut index = 0;
     let mut memory_value: u32 = 0;
     let mut read_address: usize = 0;
-    while index < addressVec.len() {
-        read_address = addressVec.get(index).unwrap() + memory_value as usize;
-        if index == addressVec.len() - 1 {
-            result = read(processHandle, read_address).unwrap();
+    while index < address_vec.len() {
+        read_address = address_vec.get(index).unwrap() + memory_value as usize;
+        if index == address_vec.len() - 1 {
+            result = read(process_handle, read_address).unwrap();
             break;
         }
-        memory_value = read(processHandle, read_address).unwrap();
+        memory_value = read(process_handle, read_address).unwrap();
         index = index + 1;
     }
     return Ok((result, read_address));

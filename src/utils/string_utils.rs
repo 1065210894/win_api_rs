@@ -1,7 +1,6 @@
 use std::ffi::OsStr;
 use std::iter::once;
 use std::os::windows::ffi::OsStrExt;
-use std::vec;
 
 /**
 将字符串变成 unicode编码 双字节数组 并获取指针
