@@ -1,9 +1,9 @@
+mod windows_api_template;
 mod utils;
-mod memory_api;
 mod macros;
 
 use winapi::um::winnt::HANDLE;
-use memory_api::{read_memory_api, init_api, write_memory_api};
+use windows_api_template::{read_memory_api, init_api, write_memory_api};
 
 
 fn main() {
