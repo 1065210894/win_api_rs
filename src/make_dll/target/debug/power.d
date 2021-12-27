@@ -1,1 +1,0 @@
-D:\work_space\rust_project\win_api_template\src\power\target\debug\power.dll: D:\work_space\rust_project\win_api_template\src\power\src\lib.rs D:\work_space\rust_project\win_api_template\src\power\src\power.rs
