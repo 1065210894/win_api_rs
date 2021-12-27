@@ -1,0 +1,23 @@
+[package]
+name = "make_dll"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "leaker"
+crate-type = ["dylib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["winuser",
+    "memoryapi",
+    "minwindef",
+    "processthreadsapi",
+    "ntdef",
+    "basetsd",
+    "tlhelp32",
+    "winnt",
+    "winerror",
+    "handleapi"] }

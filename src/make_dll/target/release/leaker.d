@@ -1,0 +1,1 @@
+D:\work_space\rust_project\win_api_template\src\make_dll\target\release\leaker.dll: D:\work_space\rust_project\win_api_template\src\make_dll\src\lib.rs D:\work_space\rust_project\win_api_template\src\make_dll\src\power.rs
