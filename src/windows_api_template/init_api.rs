@@ -1,12 +1,12 @@
 use core::ptr::null_mut;
 use winapi::um::winuser::{FindWindowW, GetWindowThreadProcessId};
-use winapi::um::processthreadsapi::{OpenProcess, PROCESS_ALL_ACCESS};
+use winapi::um::processthreadsapi::{OpenProcess};
 use winapi::um::tlhelp32::{CreateToolhelp32Snapshot, TH32CS_SNAPMODULE, MODULEENTRY32, Module32First, Module32Next, TH32CS_SNAPMODULE32};
 use crate::utils::string_utils::get_string16_ptr;
 use crate::init_api;
 use winapi::shared::{minwindef};
 use std::mem::zeroed;
-use winapi::um::winnt::HANDLE;
+use winapi::um::winnt::{HANDLE, PROCESS_ALL_ACCESS};
 use winapi::um::handleapi::CloseHandle;
 
 
@@ -22,6 +22,24 @@ pub fn get_process_data_by_window_name(window_name: &str) -> (HANDLE, usize) {
         GetWindowThreadProcessId(window_handle, &mut win_pid as *mut u32 as minwindef::LPDWORD);
         let process_handle = OpenProcess(PROCESS_ALL_ACCESS, false as minwindef::BOOL, win_pid as minwindef::DWORD);
         return (process_handle, win_pid as usize);
+    }
+}
+
+/**
+打印进程中的模块
+ */
+pub fn loop_module(process_id: usize) {
+    let mut module_iterator = init_api::ModuleIterator::of(process_id as u32);
+    loop {
+        let module_data = module_iterator.next();
+        match module_data {
+            None => {
+                break;
+            }
+            Some(value) => {
+                println!("{:#?}", value);
+            }
+        }
     }
 }
 

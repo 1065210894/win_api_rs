@@ -1,0 +1,1 @@
+D:\work_space\rust_project\win_api_template\src\windows_kernel_mod\target\x86_64-pc-windows-msvc\debug\windows_kernel_mod.dll: D:\work_space\rust_project\win_api_template\src\windows_kernel_mod\src\lib.rs

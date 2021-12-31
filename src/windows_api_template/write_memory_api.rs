@@ -11,10 +11,10 @@ use crate::utils::vec_utils;
 /**
 写入数据
 address_vec：[模块地址+偏移， 偏移， 偏移]
-write_value:要写入的数据， 无需关系写的是多少字节的数据，
+write_value:要写入的数据， 无需关心写的是多少字节的数据，
 在调用该方法的时候可以将 u32 as usize 传给 write_value 实际写入的依然是4字节数据（根据数据真实长度写入）。
 */
-pub fn write_process_memory(process_handle: HANDLE, address_vec: &Vec<usize>, write_value: usizesize) -> bool {
+pub fn write_process_memory(process_handle: HANDLE, address_vec: &Vec<usize>, write_value: usize) -> bool {
     let mut value = read_memory_by_vec::<u8>(process_handle, address_vec).unwrap();
     unsafe {
         let write_value_vec = vec_utils::usize_conversion_u8_array(write_value);

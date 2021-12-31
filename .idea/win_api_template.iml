@@ -6,9 +6,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/dto/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/struct_file/structaa/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/make_dll/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/windows_kernel_mod/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/src/struct_file/structaa/target" />
       <excludeFolder url="file://$MODULE_DIR$/src/dto/target" />
+      <excludeFolder url="file://$MODULE_DIR$/src/make_dll/target" />
+      <excludeFolder url="file://$MODULE_DIR$/src/windows_kernel_mod/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
